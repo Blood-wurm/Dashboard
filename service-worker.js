@@ -1,8 +1,8 @@
 const CACHE_NAME = 'Dashboard';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json'
+  '/Dashboard',
+  '/Dashboard/index.html',
+  '/Dashboard/manifest.json'
 ];
 
 // Install: cache static assets
