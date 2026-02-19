@@ -1,0 +1,17 @@
+{
+  "name": "Car Dashboard",
+  "short_name": "Dashboard",
+  "description": "Car dashboard with calendar and weather",
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23111'/><text x='50' y='55' text-anchor='middle' dominant-baseline='middle' font-size='50'>🚗</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
