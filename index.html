@@ -234,8 +234,7 @@
 
   <script>
     // --- Config ---
-    const GOOGLE_API_KEY = 'AIzaSyBLEGs29Or9EcuCGG_7j4IIUEIjM9f6PfA';
-    const CALENDAR_ID = 'jakedavis186@gmail.com';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqnVd_mEFRFwALoGodEqX4wbLLGTLZGrooUNpk-s4GORBxRzxcu7XtIw1DT0tDijR0/exec';
     const LAT = 37.7742;
     const LON = -87.1114;
     const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
@@ -333,17 +332,8 @@
 
     // --- Calendar ---
     async function fetchCalendarEvents() {
-      const now = new Date();
-      const timeMin = now.toISOString();
-      const end = new Date(now);
-      end.setDate(end.getDate() + 8);
-      const timeMax = end.toISOString();
-
-      const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?` +
-        `key=${GOOGLE_API_KEY}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=true&orderBy=startTime&maxResults=50`;
-
       try {
-        const res = await fetch(url);
+        const res = await fetch(APPS_SCRIPT_URL);
         if (!res.ok) throw new Error('Calendar API error');
         const data = await res.json();
         cacheSet('calendarEvents', data.items || []);
@@ -439,8 +429,8 @@
       const days = data.daily;
       let html = '';
 
-      // Skip today (index 0), show next 5
-      for (let i = 1; i <= 5 && i < days.time.length; i++) {
+      // Start from today (index 0), show 5 days
+      for (let i = 0; i < 5 && i < days.time.length; i++) {
         const d = new Date(days.time[i] + 'T12:00:00');
         const name = d.toLocaleDateString('en-US', { weekday: 'short' });
         const [fIcon] = getWeatherInfo(days.weather_code[i]);
