@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#111111">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <link rel="manifest" href="manifest.json">
   <title>Car Dashboard</title>
   <style>
@@ -86,6 +86,8 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      flex: 1;
+      min-width: 0;
     }
 
     .no-events {
@@ -272,6 +274,14 @@
       return WMO_CODES[code] || ['❓', 'Unknown'];
     }
 
+    function esc(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
     // --- Local Storage Cache ---
     function cacheSet(key, data) {
       localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
@@ -379,7 +389,7 @@
             const ap = d.getHours() >= 12 ? 'PM' : 'AM';
             timeStr = `${h}:${m} ${ap}`;
           }
-          return `<div class="event"><span class="event-time">${timeStr}</span><span class="event-title">${ev.summary || '(No title)'}</span></div>`;
+          return `<div class="event"><span class="event-time">${timeStr}</span><span class="event-title">${esc(ev.summary || '(No title)')}</span></div>`;
         }).join('');
       }
 
@@ -390,7 +400,7 @@
           const start = ev.start.dateTime || ev.start.date;
           const d = new Date(start);
           const dateStr = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-          return `<div class="event"><span class="event-date">${dateStr}</span><span class="event-title">${ev.summary || '(No title)'}</span></div>`;
+          return `<div class="event"><span class="event-date">${dateStr}</span><span class="event-title">${esc(ev.summary || '(No title)')}</span></div>`;
         }).join('');
       }
     }
