@@ -1,6 +1,6 @@
 const CACHE_NAME = 'Dashboard';
 const STATIC_ASSETS = [
-  '/Dashboard',
+  '/Dashboard'/,
   '/Dashboard/index.html',
   '/Dashboard/manifest.json'
 ];
