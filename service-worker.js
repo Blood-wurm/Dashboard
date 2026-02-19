@@ -1,4 +1,4 @@
-const CACHE_NAME = 'car-dashboard-v1';
+const CACHE_NAME = 'Dashboard';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
